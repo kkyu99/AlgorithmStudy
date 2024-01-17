@@ -6,28 +6,25 @@ import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Problem_6603 {
+public class Main {
 	static int k = 6;
 	static BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 	
 	public static void solution(int[] arr) throws IOException {
-		rec(0, 0, arr, new boolean[arr.length], new ArrayList<>());
+		rec(0, 0, arr, new ArrayList<>());
 		bw.newLine();
 	}
-	public static void rec(int step, int idx, int[] arr, boolean[] visited, List<Integer> list) throws IOException {
+	public static void rec(int step, int idx, int[] arr, List<Integer> list) throws IOException {
 		if(step == k) {
 			for(int a : list)
 				bw.append(a+" ");
 			bw.newLine();
+			return;
 		}
 		for(int i=idx; i<arr.length; i++) {
-			if(visited[i] == false) {
-				visited[i] = true;
-				list.add(arr[i]);
-				rec(step+1, i, arr, visited, list);
-				visited[i] = false;
-				list.remove(list.size()-1);
-			}
+			list.add(arr[i]);
+			rec(step+1, i+1, arr, list);
+			list.remove(list.size()-1);
 		}
 	}
 	
